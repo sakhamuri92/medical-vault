@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Running TypeScript type check before push..."
+npm run typecheck

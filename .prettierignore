@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Expo build artifacts
+.expo/
+
+# Assets (images, fonts, etc.)
+assets/
+
+# Data files
+data/
+
+# Build outputs
+dist/
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Package files (usually managed by package manager)
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
