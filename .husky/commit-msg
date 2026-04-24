@@ -7,7 +7,7 @@
 
 commit_msg=$(cat "$1")
 
-pattern='^\[(STORY: MD-[0-9]+|DEFECT: MD-[0-9]+|CHORE|FEAT|FIX|DOCS|REFACTOR|TEST)\] .{1,72}$'
+pattern='^\[(story: MD-[0-9]+|defect: MD-[0-9]+|chore|feat|fix|docs|refactor|test)\] .{1,72}$'
 
 if ! echo "$commit_msg" | grep -qE "$pattern"; then
   echo ""
@@ -18,18 +18,18 @@ if ! echo "$commit_msg" | grep -qE "$pattern"; then
   echo "  [TYPE: MD-XXXX] Short description     (ticket-linked)"
   echo ""
   echo "Valid TYPEs:"
-  echo "  [STORY: MD-1234]   Feature tied to a ticket"
-  echo "  [DEFECT: MD-1234]  Bug fix tied to a ticket"
-  echo "  [CHORE]            Config, deps, maintenance"
-  echo "  [FEAT]             Feature without a ticket"
-  echo "  [FIX]              Bug fix without a ticket"
-  echo "  [DOCS]             Documentation changes"
-  echo "  [REFACTOR]         Code restructuring"
-  echo "  [TEST]             Adding or fixing tests"
+  echo "  [story: MD-1234]   Feature tied to a ticket"
+  echo "  [defect: MD-1234]  Bug fix tied to a ticket"
+  echo "  [chore]            Config, deps, maintenance"
+  echo "  [feat]             Feature without a ticket"
+  echo "  [fix]              Bug fix without a ticket"
+  echo "  [docs]             Documentation changes"
+  echo "  [refactor]         Code restructuring"
+  echo "  [test]             Adding or fixing tests"
   echo ""
   echo "Examples:"
-  echo "  git commit -m \"[CHORE] Configure Husky and lint-staged\""
-  echo "  git commit -m \"[STORY: MD-1234] Add family member CRUD screens\""
+  echo "  git commit -m \"[chore] Configure Husky and lint-staged\""
+  echo "  git commit -m \"[story: MD-1234] Add family member CRUD screens\""
   echo ""
   exit 1
 fi

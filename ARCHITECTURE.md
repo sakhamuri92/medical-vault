@@ -7,39 +7,39 @@
 
 ## Tech Stack
 
-| Package | Version | Purpose |
-|---|---|---|
-| `expo` | ~54.0.33 | Managed workflow runtime |
-| `expo-router` | ~6.0.23 | File-based navigation |
-| `expo-sqlite` | ~16.0.10 | Local SQLite database |
-| `expo-file-system` | ~19.0.21 | Image and PDF file storage |
-| `expo-constants` | ~18.0.13 | App config access |
-| `expo-linking` | ~8.0.11 | Deep link handling |
-| `nativewind` | ^4.2.3 | Tailwind utility classes for React Native |
-| `tailwindcss` | ^3.4.x | Required by NativeWind v4 (must stay on v3) |
-| `zustand` | ^5.0.x | Lightweight global state |
-| `@tanstack/react-query` | ^5.x | Server/async state + cache invalidation |
-| `react-hook-form` | ^7.x | Form state management |
-| `zod` | ^4.x | Schema validation + TypeScript inference |
-| `@hookform/resolvers` | ^5.x | Bridges zod → react-hook-form |
-| `react-native-svg` | ^15.x | Charts and family tree visualization |
-| `uuid` + `react-native-get-random-values` | latest | UUID generation |
-| **Dev** | | |
-| `husky` | ^9.x | Git hooks manager |
-| `lint-staged` | ^16.x | Linting only staged files |
-| `jest-expo` | ~54.x | Testing preset |
-| `@testing-library/react-native` | ^13.x | Component testing |
+| Package                                   | Version  | Purpose                                     |
+| ----------------------------------------- | -------- | ------------------------------------------- |
+| `expo`                                    | ~54.0.33 | Managed workflow runtime                    |
+| `expo-router`                             | ~6.0.23  | File-based navigation                       |
+| `expo-sqlite`                             | ~16.0.10 | Local SQLite database                       |
+| `expo-file-system`                        | ~19.0.21 | Image and PDF file storage                  |
+| `expo-constants`                          | ~18.0.13 | App config access                           |
+| `expo-linking`                            | ~8.0.11  | Deep link handling                          |
+| `nativewind`                              | ^4.2.3   | Tailwind utility classes for React Native   |
+| `tailwindcss`                             | ^3.4.x   | Required by NativeWind v4 (must stay on v3) |
+| `zustand`                                 | ^5.0.x   | Lightweight global state                    |
+| `@tanstack/react-query`                   | ^5.x     | Server/async state + cache invalidation     |
+| `react-hook-form`                         | ^7.x     | Form state management                       |
+| `zod`                                     | ^4.x     | Schema validation + TypeScript inference    |
+| `@hookform/resolvers`                     | ^5.x     | Bridges zod → react-hook-form               |
+| `react-native-svg`                        | ^15.x    | Charts and family tree visualization        |
+| `uuid` + `react-native-get-random-values` | latest   | UUID generation                             |
+| **Dev**                                   |          |                                             |
+| `husky`                                   | ^9.x     | Git hooks manager                           |
+| `lint-staged`                             | ^16.x    | Linting only staged files                   |
+| `jest-expo`                               | ~54.x    | Testing preset                              |
+| `@testing-library/react-native`           | ^13.x    | Component testing                           |
 
 ### Intentionally Deferred
 
-| Package | Added in |
-|---|---|
-| `react-native-mlkit-ocr` | v1.5 |
-| `expo-camera` / `expo-image-picker` | Phase 4 |
-| `expo-print` / `expo-sharing` | Phase 8 |
-| `expo-local-authentication` | Phase 9 |
-| `expo-notifications` | Phase 9 |
-| Supabase / Firebase SDK | v3 |
+| Package                             | Added in |
+| ----------------------------------- | -------- |
+| `react-native-mlkit-ocr`            | v1.5     |
+| `expo-camera` / `expo-image-picker` | Phase 4  |
+| `expo-print` / `expo-sharing`       | Phase 8  |
+| `expo-local-authentication`         | Phase 9  |
+| `expo-notifications`                | Phase 9  |
+| Supabase / Firebase SDK             | v3       |
 
 **Note:** `tailwindcss` must remain on v3.x. NativeWind v4 is incompatible with Tailwind CSS v4.
 
@@ -74,6 +74,7 @@ src/db/adapters/cloud.adapter.ts    (v3, future)
 ```
 
 To migrate from v1 → v2, change one line in `repository.ts`:
+
 ```typescript
 // v1
 const adapter = new SqliteAdapter();
@@ -101,6 +102,7 @@ This gives automatic caching, loading states, and error handling for free.
 ### Extraction Stubs (v1 → v1.5)
 
 `src/services/extraction/index.ts` exists in v1 with an empty stub that returns `status: 'failed'`. When v1.5 ships:
+
 1. `ocr.ts` gets the MLKit implementation
 2. `structurer.ts` gets the cloud AI call
 3. `validator.ts` gets confidence scoring
@@ -231,21 +233,21 @@ medvault/
 
 Full DDL: `src/db/schema.ts`. Tables and their relationships:
 
-| Table | Purpose | Key FKs |
-|---|---|---|
-| `members` | Family member profiles | — |
-| `app_settings` | Key-value store for app preferences | — |
-| `documents` | All medical documents | `member_id → members` |
-| `document_images` | Multi-page image URIs per document | `document_id → documents` |
-| `lab_results` | Extracted test parameters and values | `document_id → documents` |
-| `bill_items` | Line items from medical bills | `document_id → documents` |
-| `vaccinations` | Vaccination records | `member_id → members`, `document_id → documents` |
-| `medicines` | Medicines extracted from prescriptions | `document_id → documents` |
-| `medicine_info` | Master medicine library (local cache) | — |
-| `relationships` | Family lineage links | `from_member_id, to_member_id → members` |
-| `heritage_conditions` | Inherited conditions per ancestor | `member_id → members` |
-| `screening_suggestions` | Preventive care recommendations | `member_id → members` |
-| `extraction_confidence` | Per-field AI confidence scores | `document_id → documents` |
+| Table                   | Purpose                                | Key FKs                                          |
+| ----------------------- | -------------------------------------- | ------------------------------------------------ |
+| `members`               | Family member profiles                 | —                                                |
+| `app_settings`          | Key-value store for app preferences    | —                                                |
+| `documents`             | All medical documents                  | `member_id → members`                            |
+| `document_images`       | Multi-page image URIs per document     | `document_id → documents`                        |
+| `lab_results`           | Extracted test parameters and values   | `document_id → documents`                        |
+| `bill_items`            | Line items from medical bills          | `document_id → documents`                        |
+| `vaccinations`          | Vaccination records                    | `member_id → members`, `document_id → documents` |
+| `medicines`             | Medicines extracted from prescriptions | `document_id → documents`                        |
+| `medicine_info`         | Master medicine library (local cache)  | —                                                |
+| `relationships`         | Family lineage links                   | `from_member_id, to_member_id → members`         |
+| `heritage_conditions`   | Inherited conditions per ancestor      | `member_id → members`                            |
+| `screening_suggestions` | Preventive care recommendations        | `member_id → members`                            |
+| `extraction_confidence` | Per-field AI confidence scores         | `document_id → documents`                        |
 
 **Schema version:** `SCHEMA_VERSION = 1` in `src/db/schema.ts`. Increment before adding/removing columns.
 
@@ -260,16 +262,16 @@ Enforced by `.husky/commit-msg` for **all git clients** (terminal, VS Code, Clau
 [TYPE: MD-XXXX] Short description      (ticket-linked)
 ```
 
-| TYPE | When |
-|---|---|
-| `STORY: MD-XXXX` | Feature tied to a story ticket |
-| `DEFECT: MD-XXXX` | Bug fix tied to a ticket |
-| `CHORE` | Config, deps, tooling |
-| `FEAT` | Feature without a ticket |
-| `FIX` | Bug fix without a ticket |
-| `DOCS` | Documentation only |
-| `REFACTOR` | Restructuring, no behavior change |
-| `TEST` | Adding or fixing tests |
+| TYPE              | When                              |
+| ----------------- | --------------------------------- |
+| `STORY: MD-XXXX`  | Feature tied to a story ticket    |
+| `DEFECT: MD-XXXX` | Bug fix tied to a ticket          |
+| `CHORE`           | Config, deps, tooling             |
+| `FEAT`            | Feature without a ticket          |
+| `FIX`             | Bug fix without a ticket          |
+| `DOCS`            | Documentation only                |
+| `REFACTOR`        | Restructuring, no behavior change |
+| `TEST`            | Adding or fixing tests            |
 
 ```bash
 git commit -m "[CHORE] Configure Husky and lint-staged"
@@ -282,12 +284,14 @@ git commit -m "[FEAT] Scaffold repository DAL with SQLite adapter"
 ## Dev Environment — iOS Simulator
 
 **One-time setup:**
+
 1. Mac App Store → install **Xcode** (~15 GB)
 2. Open Xcode once → accept license → install components
 3. `xcode-select --install` (Command Line Tools)
 4. Xcode → Settings (⌘,) → Platforms → **+** → iOS 17 → Download
 
 **Daily workflow:**
+
 ```bash
 cd medvault
 npx expo start       # start dev server
@@ -296,14 +300,15 @@ npx expo start       # start dev server
 
 **Debugging shortcuts:**
 
-| Action | Key |
-|---|---|
-| Reload app | `r` in terminal |
-| Open dev menu | `⌘D` in simulator |
+| Action                     | Key                     |
+| -------------------------- | ----------------------- |
+| Reload app                 | `r` in terminal         |
+| Open dev menu              | `⌘D` in simulator       |
 | Copy error from red screen | Click error text → `⌘C` |
-| Full stack trace | Tap the red overlay |
+| Full stack trace           | Tap the red overlay     |
 
 **When native modules are needed (v1.5):** Switch from Expo Go to a dev build:
+
 ```bash
 npx expo run:ios     # ~3 min first build, then fast
 ```
@@ -312,14 +317,55 @@ npx expo run:ios     # ~3 min first build, then fast
 
 ## Key Config Files
 
-| File | Purpose | When to change |
-|---|---|---|
-| `src/db/schema.ts` | SQL DDL | Adding/removing tables or columns |
-| `src/db/repository.ts` | DAL adapter selection | Migrating v1 → v2 → v3 |
-| `tailwind.config.js` | NativeWind + theme tokens | Adding design tokens |
-| `tsconfig.json` | TypeScript config + path aliases | Adding new `@/` aliases |
-| `.eslintrc.js` | ESLint rules | Only with user approval |
-| `app.json` | Expo config (bundle ID, permissions) | Before new native feature |
-| `babel.config.js` | Babel presets (NativeWind) | Only with user approval |
-| `metro.config.js` | Metro bundler (NativeWind transform) | Only with user approval |
-| `.husky/commit-msg` | Commit format regex | Updating commit convention |
+| File                   | Purpose                              | When to change                    |
+| ---------------------- | ------------------------------------ | --------------------------------- |
+| `src/db/schema.ts`     | SQL DDL                              | Adding/removing tables or columns |
+| `src/db/repository.ts` | DAL adapter selection                | Migrating v1 → v2 → v3            |
+| `tailwind.config.js`   | NativeWind + theme tokens            | Adding design tokens              |
+| `tsconfig.json`        | TypeScript config + path aliases     | Adding new `@/` aliases           |
+| `.eslintrc.js`         | ESLint rules                         | Only with user approval           |
+| `app.json`             | Expo config (bundle ID, permissions) | Before new native feature         |
+| `babel.config.js`      | Babel presets (NativeWind)           | Only with user approval           |
+| `metro.config.js`      | Metro bundler (NativeWind transform) | Only with user approval           |
+| `.husky/commit-msg`    | Commit format regex                  | Updating commit convention        |
+
+---
+
+## Claude Code Infrastructure
+
+### Rule Files (`.claude/rules/`) — edit as project evolves
+
+| File                  | Covers                                                             |
+| --------------------- | ------------------------------------------------------------------ |
+| `coding-standards.md` | RN elements, NativeWind v4, TypeScript, naming, state, Expo SDK 54 |
+| `code-quality.md`     | ESLint (no-disable policy) + sanitization + security rules         |
+| `accessibility.md`    | WCAG 2.1 AA: labels, roles, states, color contrast, live regions   |
+| `examples/`           | Code examples per topic — loaded on demand by agents               |
+
+### Agents (`.claude/agents/`)
+
+| Agent                 | Model  | When to spawn                                 | Role                                       |
+| --------------------- | ------ | --------------------------------------------- | ------------------------------------------ |
+| `orchestrator`        | sonnet | Complex tasks, pre-merge review, new sessions | Routes to sub-agents; reads project memory |
+| `code-guardian`       | sonnet | Inline (always) + explicit spawn for audits   | Enforces all three rule files              |
+| `doc-writer`          | haiku  | Session end, structural changes               | CLAUDE.md handoff, ARCHITECTURE.md         |
+| `security-compliance` | sonnet | Before any PR on screens/services/DB          | PHI, DAL, Zod, secrets                     |
+
+**Shared memory:** All agents read/write to `.claude/projects/-Users-venky-Documents-medical-vault-medvault/memory/`
+
+### Session Management
+
+| Mechanism             | Setting                   | Notes                                          |
+| --------------------- | ------------------------- | ---------------------------------------------- |
+| Context compaction    | Manual `/compact`         | Do not use autoCompact — fires mid-task, lossy |
+| Sub-agent turn limits | Per-call via orchestrator | Not set globally — truncates complex audits    |
+| Session-end reminder  | `Stop` hook               | Prints reminder to update CLAUDE.md            |
+
+### Command Separation
+
+| Type         | Commands                                                          | When                         |
+| ------------ | ----------------------------------------------------------------- | ---------------------------- |
+| **npm**      | `npm run typecheck`, `npm run lint`, `npm test`, `npm run format` | Routine dev + pre-merge      |
+| **Expo CLI** | `npx expo-doctor`                                                 | After dep/config changes     |
+| **Expo CLI** | `npx expo export --platform ios --dev false`                      | Pre-device bundle check only |
+| **Expo CLI** | `npx expo start --ios`                                            | Active development           |

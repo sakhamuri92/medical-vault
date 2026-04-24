@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '\n⚠️  SESSION ENDING — Update CLAUDE.md handoff section before closing. Spawn doc-writer or run /compact first.'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'code-guardian: rules from .claude/rules/ apply to this change'"
+          }
+        ]
+      }
+    ]
+  }
+}
