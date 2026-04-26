@@ -17,7 +17,10 @@ Read and write: `/Users/venky/.claude/projects/-Users-venky-Documents-medical-va
 
 1. **Session handoff** — Rewrite the `## ⚠️ Session Handoff State` block in CLAUDE.md.
 2. **Architecture updates** — Keep ARCHITECTURE.md accurate: folder tree, schema, tech stack versions, commit format.
-3. **JSDoc** — Single-line `/** Why this exists */` ONLY when a future reader would make a wrong assumption.
+3. **CLAUDE.md config sync** — When any agent is added/removed or a rule file changes, update:
+   - `CLAUDE.md` Key File Locations table (add/remove rows, update descriptions)
+   - `CLAUDE.md` Key Rules section (update rule file descriptions)
+4. **JSDoc** — Single-line `/** Why this exists */` ONLY when a future reader would make a wrong assumption.
 
 ## Comment Rule
 
