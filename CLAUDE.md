@@ -62,9 +62,9 @@ Full technical details in [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 **Rule files (read during all coding sessions):**
 
-- `.claude/rules/coding-standards.md` — Expo SDK 54, NativeWind v4, naming, architecture
-- `.claude/rules/code-quality.md` — ESLint fix guide + sanitization + security (combined)
-- `.claude/rules/accessibility.md` — WCAG 2.1 AA + React Native a11y (general + strict)
+- `.claude/rules/coding-standards.md` — project overrides only: tokens, naming, architecture; expo skill is primary source
+- `.claude/rules/code-quality.md` — ESLint rules + slim security (secrets, PHI logs, secure storage, deep links)
+- `.claude/rules/accessibility.md` — medical-app a11y overrides only; expo skill covers generic WCAG
 
 **Session management:**
 
@@ -97,20 +97,19 @@ _When in doubt: ask a clarifying question, never assume._
 
 ## Key File Locations
 
-| Path                                    | What it is                                                    |
-| --------------------------------------- | ------------------------------------------------------------- |
-| `src/db/repository.ts`                  | ⭐ Only entry point to the database                           |
-| `src/db/schema.ts`                      | SQL DDL — source of truth for all tables                      |
-| `src/db/adapters/sqlite.adapter.ts`     | v1 SQLite implementation                                      |
-| `src/db/adapters/types.ts`              | IAdapter interface                                            |
-| `src/stores/appStore.ts`                | Global locale + onboarding state                              |
-| `ARCHITECTURE.md`                       | Full tech stack, folder tree, schema, commit format, dev env  |
-| `.claude/rules/coding-standards.md`     | Lean rule doc: Expo + NativeWind + naming (→ examples/)       |
-| `.claude/rules/code-quality.md`         | Lean rule doc: ESLint + sanitization + security (→ examples/) |
-| `.claude/rules/accessibility.md`        | Lean rule doc: WCAG 2.1 AA + RN a11y (→ examples/)            |
-| `.claude/rules/examples/`               | Code examples for each rule topic — loaded on demand          |
-| `.claude/agents/orchestrator.md`        | Entry-point agent: routes tasks, reads memory (sonnet)        |
-| `.claude/agents/code-guardian.md`       | Code enforcement: inline + full audits (sonnet)               |
-| `.claude/agents/doc-writer.md`          | Documentation: CLAUDE.md, ARCHITECTURE.md (haiku)             |
-| `.claude/agents/security-compliance.md` | Security audit: PHI, DAL, Zod, secrets (sonnet)               |
-| `.claude/hooks.json`                    | Stop (session reminder) + PreToolUse (code-guardian reminder) |
+| Path                                | What it is                                                           |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| `src/db/repository.ts`              | ⭐ Only entry point to the database                                  |
+| `src/db/schema.ts`                  | SQL DDL — source of truth for all tables                             |
+| `src/db/adapters/sqlite.adapter.ts` | v1 SQLite implementation                                             |
+| `src/db/adapters/types.ts`          | IAdapter interface                                                   |
+| `src/stores/appStore.ts`            | Global locale + onboarding state                                     |
+| `ARCHITECTURE.md`                   | Full tech stack, folder tree, schema, commit format, dev env         |
+| `.claude/rules/coding-standards.md` | Project overrides: tokens, naming, architecture (expo skill primary) |
+| `.claude/rules/code-quality.md`     | ESLint rules + slim security (SEC-01 through SEC-04)                 |
+| `.claude/rules/accessibility.md`    | Medical-app a11y overrides (A11Y-S01 through A11Y-S07)               |
+| `.claude/agents/orchestrator.md`    | Entry-point agent: Superpowers routing + graceful degradation        |
+| `.claude/agents/code-guardian.md`   | Code + security enforcement: inline + full audits (sonnet)           |
+| `.claude/agents/doc-writer.md`      | Docs: CLAUDE.md, ARCHITECTURE.md, memory writes (haiku)              |
+| `.claude/settings.json`             | Committed plugin config — shared across all contributors             |
+| `.claude/hooks.json`                | Stop + PreToolUse + PostToolUse hooks                                |
