@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '\n⚠️  SESSION ENDING — Update CLAUDE.md handoff section before closing. Spawn doc-writer or run /compact first.'"
+            "command": "echo '\n⚠️  SESSION ENDING — orchestrator will route to doc-writer for memory + CLAUDE.md update.'"
           }
         ]
       }
@@ -18,6 +18,17 @@
           {
             "type": "command",
             "command": "echo 'code-guardian: rules from .claude/rules/ apply to this change'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'code-guardian: verify change passes inline checklist before proceeding'"
           }
         ]
       }
